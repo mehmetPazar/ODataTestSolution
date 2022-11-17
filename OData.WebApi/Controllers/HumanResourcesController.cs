@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
+using Microsoft.EntityFrameworkCore;
 using OData.WebApi.Models;
 
 namespace OData.WebApi.Controllers
@@ -8,11 +9,11 @@ namespace OData.WebApi.Controllers
     [Route("[controller]")]
     public class HumanResourcesController : ControllerBase
     {
-        private HumanResourcesContext humanResourcesContext;
+        private HumanResourcesContext _humanResourcesContext;
 
         public HumanResourcesController(HumanResourcesContext humanResourcesContext)
         {
-            this.humanResourcesContext = humanResourcesContext;
+            _humanResourcesContext = humanResourcesContext;
         }
 
         [HttpGet("Get")]
@@ -35,7 +36,22 @@ namespace OData.WebApi.Controllers
             }*/
 
             //ActionResult
-            return Ok(humanResourcesContext.Countries.AsQueryable());
+            return Ok(_humanResourcesContext.Countries.AsQueryable());
+        }
+
+        [HttpGet("GetRegionWithLocation")]
+        [EnableQuery]
+        public ActionResult GetRegionWithLocation()
+        {
+            //Postman Example Request Query
+            //https://localhost:7116/HumanResources/GetRegionWithLocation
+            //https://localhost:7116/HumanResources/GetRegionWithLocation?filter=regionId in (3,4)
+            //https://localhost:7116/HumanResources/GetRegionWithLocation?filter=regionId in (3,4)
+            //https://localhost:7116/HumanResources/GetRegionWithLocation?filter=region/regionId eq 2
+            //https://localhost:7116/HumanResources/GetRegionWithLocation?filter=region/regionName eq 'Americas'
+            //https://localhost:7116/HumanResources/GetRegionWithLocation?filter=length(countryName) eq 5
+
+            return Ok(_humanResourcesContext.Countries.Include(i => i.Region).AsQueryable());
         }
     }
 }

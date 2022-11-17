@@ -1,12 +1,16 @@
 using Microsoft.AspNetCore.OData;
 using Microsoft.EntityFrameworkCore;
 using OData.WebApi.Models;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers().AddOData(conf =>
+builder.Services
+    .AddControllers()
+    .AddJsonOptions(i => i.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve) //Circular Dependency Injection
+    .AddOData(conf =>
 {
     conf.EnableQueryFeatures();
 });
