@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.OData;
-using Microsoft.EntityFrameworkCore;
 using OData.WebApi.Models;
 using System.Text.Json.Serialization;
 

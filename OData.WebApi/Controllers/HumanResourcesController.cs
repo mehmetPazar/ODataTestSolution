@@ -5,6 +5,7 @@ using OData.WebApi.Models;
 
 namespace OData.WebApi.Controllers
 {
+    //EF-OData-Circeler Dependecy
     [ApiController]
     [Route("[controller]")]
     public class HumanResourcesController : ControllerBase
