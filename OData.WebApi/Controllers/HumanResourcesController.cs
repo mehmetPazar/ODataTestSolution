@@ -44,7 +44,7 @@ namespace OData.WebApi.Controllers
         [EnableQuery]
         public ActionResult GetRegionWithLocation()
         {
-            //Postman Example Request Query
+            //Postman Example Request Query 
             //https://localhost:7116/HumanResources/GetRegionWithLocation
             //https://localhost:7116/HumanResources/GetRegionWithLocation?filter=regionId in (3,4)
             //https://localhost:7116/HumanResources/GetRegionWithLocation?filter=regionId in (3,4)
